@@ -1,0 +1,243 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-5">
+          <div class="col-md-8">
+            <h4 class="card-title"><i class="{{st.icon}}"></i> 
+              <span>{{st.caption}}</span>
+            </h4>
+          </div>
+          <div class="col-md-4 text-right">
+            {{#uScopes.update}} 
+              <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn"><i class="fas fa-check"></i> Сохранить</button>
+            {{/uScopes.update}} 
+          </div>
+        </div>
+        <form class="edit-form" novalidate>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="page-repeater form-group">
+                <div data-repeater-list="pages">
+                  <div data-repeater-item class="mb-3">
+                    <div class="row mb-3">
+                      <h4 class="card-title col-md-8" data-number="1">Страница <span>1</span></h4>
+                      {{#uScopes.delete}}
+                        <div class="col-md-4 text-right">
+                          <button data-repeater-delete="" class="btn btn-danger waves-effect waves-light" type="button"><i class="ti-close"></i></button>
+                        </div>
+                      {{/uScopes.delete}}
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="card card-image">
+                          <div class="card-overlay"></div>
+                          <div class="card-body pt-5 pb-5">
+                            <div class="form-group">
+                              <select 
+                                  class="form-control ajax-select" 
+                                  data-url="/api/v1/news?status=visible&position_free=true" 
+                                  data-base-url="/api/v1/news?status=visible&position_free=true"
+                                  data-allow-clear="true" 
+                                  data-position="1"
+                                  name="news_id[1]" 
+                                  value="{{news_id}}">
+                              <option value=""></option>
+                              {{#news_id}}
+                                <option 
+                                    value="{{news_id}}" 
+                                    selected="selected">
+                                    {{news.name}}
+                                </option>
+                              {{/news_id}}
+                              </select>
+                            </div>
+                            <h4 class="hidden promo-badge"><span class="badge badge-success">Промо-новость</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card card-image">
+                          <div class="card-overlay"></div>
+                          <div class="card-body pt-5 pb-5">
+                            <div class="form-group">
+                              <select 
+                                  class="form-control ajax-select" 
+                                  data-url="/api/v1/news?status=visible&position_free=true" 
+                                  data-base-url="/api/v1/news?status=visible&position_free=true"
+                                  data-allow-clear="true" 
+                                  data-position="2"
+                                  name="news_id[2]" 
+                                  value="{{news_id}}">
+                              <option value=""></option>
+                              {{#news_id}}
+                                <option 
+                                    value="{{news_id}}" 
+                                    selected="selected">
+                                    {{news.name}}
+                                </option>
+                              {{/news_id}}
+                              </select>
+                            </div>
+                            <h4 class="hidden promo-badge"><span class="badge badge-success">Промо-новость</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="card card-image">
+                          <div class="card-overlay"></div>
+                          <div class="card-body pt-5 pb-5">
+                            <div class="form-group">
+                              <select 
+                                  class="form-control ajax-select" 
+                                  data-url="/api/v1/news?status=visible&position_free=true" 
+                                  data-base-url="/api/v1/news?status=visible&position_free=true"
+                                  data-allow-clear="true" 
+                                  data-position="3"
+                                  name="news_id[3]" 
+                                  value="{{news_id}}">
+                              <option value=""></option>
+                              {{#news_id}}
+                                <option 
+                                    value="{{news_id}}" 
+                                    selected="selected">
+                                    {{news.name}}
+                                </option>
+                              {{/news_id}}
+                              </select>
+                            </div>
+                            <h4 class="hidden promo-badge"><span class="badge badge-success">Промо-новость</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card card-image">
+                          <div class="card-overlay"></div>
+                          <div class="card-body pt-5 pb-5">
+                            <div class="form-group">
+                              <select 
+                                  class="form-control ajax-select" 
+                                  data-url="/api/v1/news?status=visible&position_free=true" 
+                                  data-base-url="/api/v1/news?status=visible&position_free=true"
+                                  data-allow-clear="true" 
+                                  data-position="4"
+                                  name="news_id[4]" 
+                                  value="{{news_id}}">
+                              <option value=""></option>
+                              {{#news_id}}
+                                <option 
+                                    value="{{news_id}}" 
+                                    selected="selected">
+                                    {{news.name}}
+                                </option>
+                              {{/news_id}}
+                              </select>
+                            </div>
+                            <h4 class="hidden promo-badge"><span class="badge badge-success">Промо-новость</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card card-image">
+                          <div class="card-overlay"></div>
+                          <div class="card-body pt-5 pb-5">
+                            <div class="form-group">
+                              <select 
+                                  class="form-control ajax-select" 
+                                  data-url="/api/v1/news?status=visible&position_free=true" 
+                                  data-base-url="/api/v1/news?status=visible&position_free=true"
+                                  data-allow-clear="true" 
+                                  data-position="5"
+                                  name="news_id[5]" 
+                                  value="{{news_id}}">
+                              <option value=""></option>
+                              {{#news_id}}
+                                <option 
+                                    value="{{news_id}}" 
+                                    selected="selected">
+                                    {{news.name}}
+                                </option>
+                              {{/news_id}}
+                              </select>
+                            </div>
+                            <h4 class="hidden promo-badge"><span class="badge badge-success">Промо-новость</span></h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="card">
+                          <div class="card-body">
+                            <img class="w-100" src="../constructor/feed.png">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+                {{#uScopes.create}}
+                  <button type="button" data-repeater-create="" class="btn btn-info waves-effect waves-light">Настроить следующую страницу</button>
+                {{/uScopes.create}}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

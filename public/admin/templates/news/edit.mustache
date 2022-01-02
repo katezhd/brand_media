@@ -1,0 +1,656 @@
+<form class="edit-form admin" enctype="multipart/form-data" novalidate>
+  <div class="row service-panel-close">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <h4 class="card-title">
+                <i class="{{st.icon}}"></i> {{st.caption}}. 
+                {{#st.id}} 
+                  {{#preview}}Просмотр записи #{{st.id}}{{/preview}} 
+                  {{^preview}}Редактирование записи #{{st.id}}{{/preview}} 
+                {{/st.id}} 
+                {{^st.id}}Создание записи{{/st.id}}
+              </h4>
+              {{#is_published}}
+                {{#is_delayed}}
+                  <h5 class="card-subtitle">Публикация запланирована на <span data-date="{{published_at}}">{{published_at}}</span></h5>
+                {{/is_delayed}}
+                {{^is_delayed}}
+                  <h5 class="card-subtitle">Опубликовано <span data-date="{{published_at}}">{{published_at}}</span></h5>
+                {{/is_delayed}}
+              {{/is_published}}
+            </div>
+            <div class="col-md-6 text-right">
+              <button type="button" class="btn waves-effect waves-light btn-outline-secondary list-btn" data-route="{{st.cntrl}}-list-{{st.page}}"><i class="fas fa-list"></i> Все {{st.caption}}</button> 
+              {{#st.id}}
+                <button type="button" class="btn waves-effect waves-light btn-outline-info preview-btn" data-id="{{st.id}}"><i class="fas fa-eye"></i> Предпросмотр</button> 
+              {{/st.id}}
+              {{#uScopes.update}} 
+                {{#preview}} 
+                  <button type="button" class="btn waves-effect waves-light btn-outline-primary edit-btn" data-id="{{st.id}}"><i class="fas fa-pencil-alt"></i> Редактировать</button> 
+                {{/preview}} 
+                {{^preview}} 
+                  {{#st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id="{{st.id}}"><i class="fas fa-check"></i> Сохранить</button> {{/st.id}} 
+                {{/preview}} 
+              {{/uScopes.update}} 
+              {{#uScopes.create}} 
+                {{^preview}} 
+                  {{^st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id><i class="fas fa-check"></i> Создать</button> {{/st.id}} 
+                {{/preview}} 
+              {{/uScopes.create}}
+            </div>
+          </div>    
+          <div class="row">
+            <div class="col-md-12">
+              {{#preview}} 
+                <div class="article">
+                  <div>
+                    {{#image}}
+                      <header id="editorCover" class="longread-header main-img__wrap" style="background-image: url(\'/storage/news/{{image}}\')"></header>
+                    {{/image}}
+                    <div class="article__container">
+                      <h1 class="article__title">{{name}}</h1>
+                    </div>
+                  </div>
+                  {{{text}}}
+                </div>
+              {{/preview}} 
+              <input type="hidden" class="form-control" name="id" value="{{id}}">
+              <input type="hidden" class="form-control" name="name" value="{{#name}}{{name}}{{/name}}" required>
+              {{^preview}} 
+                <input type="hidden" class="form-control" name="image">
+                <input type="hidden" class="form-control" name="image_delete">
+                <input type="hidden" class="form-control" name="text" value="{{text}}">
+                {{#st.id}}
+                  <div id="editor" class="article">
+                    <div class="editor__item">
+                      {{#image}}
+                        <header id="editorCover" data-image class="longread-header main-img__wrap" style="background-image: url(\'/storage/news/{{image}}\')"></header>
+                      {{/image}}
+                      {{^image}}
+                        <header id="editorCover" class="longread-header main-img__wrap" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url(\'/editor/img/nature.jpg\')"></header>
+                      {{/image}}
+                      <div class="article__container">
+                        <h1 id="editorTitle" class="article__title editable" data-disable-toolbar="true" data-placeholder="Введите заголовок материала">{{name}}</h1>
+                      </div>
+                    </div>
+                    {{{text}}}
+                  </div>
+                {{/st.id}}
+                {{^st.id}}
+                  <div id="editor" class="article">
+                    <div class="editor__item">
+                      <header id="editorCover" class="longread-header main-img__wrap" style="background-image: url(\'/editor/img/nature.jpg\')"></header>
+                      <div class="article__container">
+                        <h1 id="editorTitle" class="article__title editable" data-disable-toolbar="true" data-placeholder="Введите заголовок материала"></h1>
+                      </div>
+                    </div>
+                    {{#text}}
+                      {{{text}}}
+                    {{/text}}
+                    {{^text}}
+                      <div class="editor__item">
+                        <div class="article__container editable" data-placeholder="Начните вводить текст"></div>
+                      </div>
+                    {{/text}}
+                  </div>
+                {{/st.id}}
+              {{/preview}}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-6 offset-md-6 text-right">
+              <button type="button" class="btn waves-effect waves-light btn-outline-secondary list-btn" data-route="{{st.cntrl}}-list-{{st.page}}"><i class="fas fa-list"></i> Все {{st.caption}}</button> 
+              {{#st.id}}
+                <button type="button" class="btn waves-effect waves-light btn-outline-info preview-btn" data-id="{{st.id}}"><i class="fas fa-eye"></i> Предпросмотр</button> 
+              {{/st.id}}
+              {{#uScopes.update}} 
+                {{#preview}} 
+                  <button type="button" class="btn waves-effect waves-light btn-outline-primary edit-btn" data-id="{{st.id}}"><i class="fas fa-pencil-alt"></i> Редактировать</button> 
+                {{/preview}} 
+                {{^preview}} 
+                  {{#st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id="{{st.id}}"><i class="fas fa-check"></i> Сохранить</button> {{/st.id}} 
+                {{/preview}} 
+              {{/uScopes.update}} 
+              {{#uScopes.create}} 
+                {{^preview}} 
+                  {{^st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id><i class="fas fa-check"></i> Создать</button> {{/st.id}} 
+                {{/preview}} 
+              {{/uScopes.create}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="customizer">
+    <a href="#" class="service-panel-toggle"><i class="fa fa-cog"></i></a>
+    <div class="customizer-body scrollable" style="padding: 20px">
+      <h5 class="card-title">Настройки публикации</h5>
+      <hr>
+      {{#preview}} 
+        <label class="control-label">Дата и время публикации</label>
+        {{#published_at}}
+          <blockquote data-date="{{published_at}}">{{published_at}}</blockquote>
+        {{/published_at}}
+        {{^published_at}}
+          <blockquote>не указано</blockquote>
+        {{/published_at}}
+        
+        <label class="control-label">Опубликовано</label>
+        {{#is_published}}
+          <blockquote>Да {{#publisher}}({{publisher.firstname}} {{publisher.lastname}}){{/publisher}}</blockquote>
+        {{/is_published}} 
+        {{^is_published}}
+          <blockquote>Нет</blockquote>
+        {{/is_published}}
+        <hr>
+
+        {{#uScopes.update}}
+          <button type="button" class="btn btn-block waves-effect waves-light btn-outline-primary edit-btn" data-id="{{st.id}}"><i class="fas fa-pencil-alt"></i> Редактировать</button> 
+        {{/uScopes.update}}
+        {{#st.id}}
+          <button type="button" class="btn btn-block waves-effect waves-light btn-outline-info preview-btn" data-id="{{st.id}}"><i class="fas fa-eye"></i> Предпросмотр</button> 
+        {{/st.id}}
+        <hr>
+
+        <label class="control-label">Теги</label>
+        <blockquote>
+          <ul>
+            {{#tags}}
+                <li>{{name}}</li>
+            {{/tags}}
+          </ul>
+        </blockquote>
+
+        <label class="control-label">Системные теги</label>
+        <blockquote>
+          <ul>
+            {{#system_tags}}
+                <li>{{name}}</li>
+            {{/system_tags}}
+          </ul>
+        </blockquote>
+        
+        <label class="control-label">Категория</label> 
+        <blockquote>{{category.name}}</blockquote>
+
+        <label class="control-label">Автор</label> 
+        <blockquote>{{author.firstname}}  {{author.lastname}}</blockquote>
+
+        <label class="control-label">Тег title</label> 
+        <blockquote>{{#meta_title}}{{meta_title}}{{/meta_title}}{{^meta_title}}{{name}}{{/meta_title}}</blockquote>
+        <small class="form-text text-muted">А также og:title, twitter:title, itemprop="headline"</small>
+
+        <br>
+        <label class="control-label">Тег description</label> 
+        <blockquote>{{meta_description}}</blockquote>
+        <small class="form-text text-muted">А также og:description, twitter:description, itemprop="description"</small>
+
+        <br>
+        {{#uScopes.update}}
+          <button type="button" class="btn btn-block waves-effect waves-light btn-outline-primary edit-btn" data-id="{{st.id}}"><i class="fas fa-pencil-alt"></i> Редактировать</button> 
+        {{/uScopes.update}}
+        {{#st.id}}
+          <button type="button" class="btn btn-block waves-effect waves-light btn-outline-info preview-btn" data-id="{{st.id}}"><i class="fas fa-eye"></i> Предпросмотр</button> 
+        {{/st.id}}
+
+      {{/preview}} 
+      {{^preview}} 
+        {{#uScopes.publish}}
+          {{^is_published}}
+            <div class="form-group mt-3">
+              <div class="custom-control custom-radio">
+                <input type="radio" id="publish_now" name="publish" value="now" class="custom-control-input">
+                <label class="custom-control-label" for="publish_now">Опубликовать сейчас</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="custom-control custom-radio mb-3">
+                <input type="radio" id="publish_later" name="publish" value="later" class="custom-control-input">
+                <label class="custom-control-label" for="publish_later">Запланировать публикацию</label>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <input type="date" class="form-control" name="publish_date" value="{{publish_date}}">
+                </div>
+                <div class="col-6">
+                  <input type="time" class="form-control" name="publish_time" value="{{publish_time}}">
+                </div>
+              </div>
+          </div>
+          {{/is_published}}
+          {{#is_published}}
+            <div class="form-group">
+              <label class="control-label">Дата и время публикации</label>
+              <div class="row">
+                <div class="col-6">
+                  <input type="date" class="form-control" name="publish_date" value="{{publish_date}}">
+                </div>
+                <div class="col-6">
+                  <input type="time" class="form-control" name="publish_time" value="{{publish_time}}">
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="is_published" value="{{is_published}}">
+            <button type="button" class="btn btn-block waves-effect waves-light btn-outline-secondary unpublish-btn">Снять с публикации</button>
+          {{/is_published}}
+        {{/uScopes.publish}}
+        {{^uScopes.publish}}
+          <label class="control-label">Дата и время публикации</label>
+          {{#published_at}}
+            <blockquote data-date="{{published_at}}">{{published_at}}</blockquote>
+            <input type="hidden" name="is_published" value="{{is_published}}">
+          {{/published_at}}
+          {{^published_at}}
+            <blockquote>не указано</blockquote>
+          {{/published_at}}
+          
+          <label class="control-label">Опубликовано</label>
+          {{#is_published}}
+            <blockquote>Да {{#publisher}}({{publisher.firstname}} {{publisher.lastname}}){{/publisher}}</blockquote>
+          {{/is_published}} 
+          {{^is_published}}
+            <blockquote>Нет</blockquote>
+          {{/is_published}}
+        {{/uScopes.publish}} 
+        <hr>
+
+        {{#uScopes.create}} 
+          {{^st.id}} <button type="button" class="btn btn-block waves-effect waves-light btn-outline-success save-btn" data-id><i class="fas fa-check"></i> Создать</button> {{/st.id}}  
+        {{/uScopes.create}}
+        {{#uScopes.update}}
+          {{#st.id}} <button type="button" class="btn btn-block waves-effect waves-light btn-outline-success save-btn" data-id="{{st.id}}"><i class="fas fa-check"></i> Сохранить</button> {{/st.id}} 
+        {{/uScopes.update}}
+        {{#st.id}}
+          <button type="button" class="btn btn-block waves-effect waves-light btn-outline-info preview-btn" data-id="{{st.id}}"><i class="fas fa-eye"></i> Предпросмотр</button> 
+        {{/st.id}}
+        <hr>
+
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+              <div class="custom-control custom-checkbox">
+                {{#is_promo}}
+                  <input type="checkbox" checked class="custom-control-input" id="is_promo" name="is_promo" value="1">
+                {{/is_promo}}
+                {{^is_promo}}
+                  <input type="checkbox" class="custom-control-input" id="is_promo" name="is_promo" value="1">
+                {{/is_promo}}
+                  <label class="custom-control-label" for="is_promo">Промо-новость</label>
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Теги</label>
+          <select 
+            class="form-control ajax-select" 
+            data-url="/api/v1/tags?status=visible&is_system=0" 
+            data-base-url="/api/v1/tags?status=visible&is_system=0"
+            multiple 
+            data-tags="true"
+            data-selection-length="10" 
+            name="tag_id[]">
+            
+            {{#tags}}
+              <option 
+                value="{{id}}" 
+                selected="selected">
+                {{name}}
+              </option>
+            {{/tags}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Системные теги</label>
+          <select 
+            class="form-control ajax-select" 
+            data-url="/api/v1/tags?status=visible&is_system=1" 
+            data-base-url="/api/v1/tags?status=visible&is_system=1"
+            multiple 
+            data-tags="true"
+            data-selection-length="10" 
+            name="tag_id[]">
+            
+            {{#system_tags}}
+              <option 
+                value="{{id}}" 
+                selected="selected">
+                {{name}}
+              </option>
+            {{/system_tags}}
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Категория</label>
+          <select 
+              class="form-control ajax-select" 
+              data-url="/api/v1/categories?status=visible" 
+              data-base-url="/api/v1/categories?status=visible"
+              data-allow-clear="true" 
+              name="category_id" 
+              value="{{category_id}}"
+              required>
+          <option value=""></option>
+          {{#category_id}}
+            <option 
+                value="{{category_id}}" 
+                selected="selected">
+                {{category.name}}
+            </option>
+          {{/category_id}}
+          </select>
+          <div class="invalid-feedback">Поле категория обязательное</div>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Автор</label>
+          <select 
+              class="form-control ajax-select" 
+              data-url="/api/v1/authors?status=visible" 
+              data-base-url="/api/v1/authors?status=visible"
+              data-allow-clear="true" 
+              name="author_id" 
+              value="{{author_id}}">
+          <option value=""></option>
+          {{#author_id}}
+            <option 
+                value="{{author_id}}" 
+                selected="selected">
+                {{author.firstname}}  {{author.lastname}}
+            </option>
+          {{/author_id}}
+          </select>
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Тег title</label>
+          {{#meta_title}}
+            <textarea class="form-control" name="meta_title" rows="3">{{meta_title}}</textarea>
+          {{/meta_title}}
+          {{^meta_title}}
+            <textarea class="form-control" name="meta_title" rows="3">{{name}}</textarea>
+          {{/meta_title}}
+          <small class="form-text text-muted">А также og:title, twitter:title, itemprop="headline"</small>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Тег description</label>
+          <textarea class="form-control" name="meta_description"  rows="8">{{meta_description}}</textarea>
+          <small class="form-text text-muted">А также og:description, twitter:description, itemprop="description"</small>
+        </div>
+
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+              <div class="custom-control custom-checkbox">
+                  <input type="checkbox" checked class="custom-control-input" id="use_typograph" name="use_typograph" value="1">
+                  <label class="custom-control-label" for="use_typograph">Включить типографирование</label>
+              </div>
+          </div>
+        </div>
+
+        {{#uScopes.create}} 
+          {{^st.id}} <button type="button" class="btn btn-block waves-effect waves-light btn-outline-success save-btn" data-id><i class="fas fa-check"></i> Создать</button> {{/st.id}}  
+        {{/uScopes.create}}
+        {{#uScopes.update}}
+          {{#st.id}} <button type="button" class="btn btn-block waves-effect waves-light btn-outline-success save-btn" data-id="{{st.id}}"><i class="fas fa-check"></i> Сохранить</button> {{/st.id}} 
+        {{/uScopes.update}}
+        {{#st.id}}
+          <button type="button" class="btn btn-block waves-effect waves-light btn-outline-info preview-btn" data-id="{{st.id}}"><i class="fas fa-eye"></i> Предпросмотр</button> 
+        {{/st.id}}
+        
+      {{/preview}} 
+    </div>
+  </aside>
+</form>
+
+<div class="modal" tabindex="-1" id="libraryModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="library">
+          <div class="library-row"><b>Заголовки</b></div>
+          <a href="#" class="library-col library-col-focus">
+            <img src="../editor/img/previews/h2_v1.jpg" alt="">
+            <span>Заголовок 1</span>
+            <span class="library-html">
+              <div class="article__container">
+                <h2 class="article__title editable" data-disable-toolbar="true"></h2>
+              </div>
+            </span>
+          </a>
+          <a href="#" class="library-col library-col-focus">
+            <img src="../editor/img/previews/h3_v1.jpg" alt="">
+            <span>Заголовок 2</span>
+            <span class="library-html">
+              <div class="article__container">
+                <h3 class="article__title editable" data-disable-toolbar="true"></h3>
+              </div>
+            </span>
+          </a>
+          <a href="#" class="library-col library-col-focus">
+            <img src="../editor/img/previews/h4_v1.jpg" alt="">
+            <span>Заголовок 3</span>
+            <span class="library-html">
+              <div class="article__container">
+                <h4 class="article__title editable" data-disable-toolbar="true"></h4>
+              </div>
+            </span>
+          </a>
+          <div class="library-row"><b>Текст</b></div>
+          <a href="#text" class="library-col library-col-focus">
+            <img src="../editor/img/previews/text_v1.jpg" alt="">
+            <span>Текстовый блок</span>
+            <span class="library-html">
+              <div class="article__container">
+                <div class="article__main editable"></div>
+              </div>
+            </span>
+          </a>
+          <a href="#blockquote" class="library-col library-col-focus">
+            <img src="../editor/img/previews/blockquote_v1.jpg" alt="">
+            <span>Цитата</span>
+            <span class="library-html">
+              <div class="article__quote editable"></div>
+            </span>
+          </a>
+          <div class="library-row"><b>Изображения</b></div>
+          <a href="#image_1_v1" class="library-col">
+            <img src="../editor/img/previews/i1_v1.jpg" alt="">
+            <span>Изображение с подписью</span>
+            <span class="library-html">
+              <div class="article__images article__images--simple">
+                <div class="article__image-wrap">
+                  <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                  <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+              </div>
+            </span>
+          </a>
+          <a href="#" class="library-col">
+            <img src="../editor/img/previews/i2_v1.jpg" alt="">
+            <span>Галерея из 2-х изображений</span>
+            <span class="library-html">
+              <div class="article__images article__container">
+                  <div class="article__image-wrap article__image-wrap--2w">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+                  <div class="article__image-wrap article__image-wrap--2w">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+              </div>
+            </span>
+          </a>
+          <a href="#" class="library-col">
+            <img src="../editor/img/previews/i3_v1.jpg" alt="">
+            <span>Галерея из 3-х изображений</span>
+            <span class="library-html">
+              <div class="article__images article__container">
+                  <div class="article__image-wrap article__image-wrap--3w">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+                  <div class="article__image-wrap article__image-wrap--3w">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+                  <div class="article__image-wrap article__image-wrap--3w">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+              </div>
+            </span>
+          </a>
+          <a href="#image_3_v2" class="library-col">
+            <img src="../editor/img/previews/i3_v3.jpg" alt="">
+            <span>Галерея из 3-х изображений</span>
+            <span class="library-html">
+              <div class="article__images article__images--template-right article__container">
+                  <div class="article__image-wrap article__image-wrap--a">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+                  <div class="article__image-wrap article__image-wrap--b">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+                  <div class="article__image-wrap article__image-wrap--c">
+                      <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                      <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                  </div>
+              </div>
+            </span>
+          </a>
+          <a href="#image_3_v3" class="library-col">
+            <img src="../editor/img/previews/i3_v2.jpg" alt="">
+            <span>Галерея из 3-х изображений</span>
+            <span class="library-html">
+              <div class="article__images article__images--template-left article__container">
+                <div class="article__image-wrap article__image-wrap--a">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--b">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--c">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+              </div>
+            </span>
+          </a>
+          <a href="#image_5_v1" class="library-col">
+            <img src="../editor/img/previews/i5_v2.jpg" alt="">
+            <span>Галерея из 5-ти изображений</span>
+            <span class="library-html">
+              <div class="article__images article__container">
+                <div class="article__image-wrap article__image-wrap--3w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--3w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--3w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--2w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--2w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+              </div>
+            </span>
+          </a>
+          <a href="#image_5_v2" class="library-col">
+            <img src="../editor/img/previews/i5_v1.jpg" alt="">
+            <span>Галерея из 5-ти изображений</span>
+            <span class="library-html">
+              <div class="article__images article__container">
+                <div class="article__image-wrap article__image-wrap--2w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--2w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--3w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--3w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+                <div class="article__image-wrap article__image-wrap--3w  article__image-wrap--2h">
+                    <div class="article__image" style="background-image: url(\'/editor/img/nature.jpg\');"></div>
+                    <div class="article__image-name editable" data-placeholder="Подпись к изображению"></div>
+                </div>
+              </div>
+            </span>
+          </a>
+          <div class="library-row"><b>Популярные сервисы</b></div>
+          <a href="#" class="library-col library-col-others library-col-youtube">
+            <img src="../editor/img/previews/youtube_v1.jpg" alt="">
+            <span>Youtube</span>
+            <span class="library-html">
+              <div class="article__video-wrap" style="background-color: #000000;">
+                  <button class="play-btn play-btn--news" style="display:none;">
+                      <svg>
+                          <use xlink:href="#play"/>
+                      </svg>
+                  </button>
+              </div>
+            </span>
+          </a>
+          <a href="#" class="library-col library-col-others library-col-facebook">
+            <img src="../editor/img/previews/facebook_v1.jpg" alt="">
+            <span>Facebook</span>
+            <span class="library-html"></span>
+          </a>
+          <a href="#" class="library-col library-col-others library-col-twitter">
+            <img src="../editor/img/previews/twitter_v1.jpg" alt="">
+            <span>Twitter</span>
+            <span class="library-html"></span>
+          </a>
+          <a href="#" class="library-col library-col-others library-col-instagram">
+            <img src="../editor/img/previews/instagram_v1.jpg" alt="">
+            <span>Instagram</span>
+            <span class="library-html"></span>
+          </a>
+          <a href="#" class="library-col library-col-others library-col-tiktok">
+            <img src="../editor/img/previews/tiktok_v1.jpg" alt="">
+            <span>Tiktok</span>
+            <span class="library-html"></span>
+          </a>
+          <a href="#" class="library-col library-col-others library-col-embed">
+            <img src="../editor/img/previews/embed_v1.jpg" alt="">
+            <span>Код вставки</span>
+            <span class="library-html"></span>
+          </a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg style="display: none;">
+  <symbol id="play" viewBox="0 0 14 16">
+    <path d="M13.0163 6.27705C14.3289 7.0507 14.3289 8.94941 13.0163 9.72306L3.46467 15.3526C2.13141 16.1384 0.449165 15.1771 0.449165 13.6296L0.449165 2.37055C0.449165 0.822958 2.13142 -0.138249 3.46467 0.647541L13.0163 6.27705Z"/>
+  </symbol>
+</svg>

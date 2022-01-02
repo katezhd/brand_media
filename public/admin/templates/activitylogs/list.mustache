@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- title -->
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <h4 class="card-title">
+                            <i class="{{st.icon}}"></i> 
+                            <span data-lang="{{st.caption}}">{{st.caption}}</span>   
+                        </h4>
+                    </div>
+                </div>
+                <!-- title -->
+                <div class="card bg-light">
+                    <div class="card-body collapse show">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Кто делал</label>
+                                    {{#st.filters.activitylogs.with_trashed_causers.value}}
+                                        <select 
+                                            class="form-control ajax-select filter-select" 
+                                            data-url="/api/v1/users?with_trashed=1" 
+                                            data-base-url="/api/v1/users?with_trashed=1" 
+                                            data-label="Все пользователи"
+                                            name="causer_id" 
+                                            value="{{st.filters.activitylogs.causer_id.value}}">
+                                    {{/st.filters.activitylogs.with_trashed_causers.value}}
+                                    {{^st.filters.activitylogs.with_trashed_causers.value}}
+                                        <select 
+                                            class="form-control ajax-select filter-select" 
+                                            data-url="/api/v1/users" 
+                                            data-base-url="/api/v1/users" 
+                                            data-label="Все пользователи"
+                                            name="causer_id" 
+                                            value="{{st.filters.activitylogs.causer_id.value}}">
+                                    {{/st.filters.activitylogs.with_trashed_causers.value}}
+                                        <option value="">Все пользователи</option>
+                                        {{#st.filters.activitylogs.causer_id.value}}
+                                            <option value="{{st.filters.activitylogs.causer_id.value}}" selected="selected">{{st.filters.activitylogs.causer_id.text}}</option>
+                                        {{/st.filters.activitylogs.causer_id.value}}
+                                    </select>
+                                </div>
+                                <div class="form-check form-check-inline mb-4">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" 
+                                                class="custom-control-input filter-checkbox" 
+                                                id="deletedCausers" 
+                                                name="with_trashed_causers"
+                                                value="1"
+                                                data-checked="{{st.filters.activitylogs.with_trashed_causers.value}}">
+                                        <label 
+                                            class="custom-control-label" 
+                                            for="deletedCausers">показывать удаленных</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Действие</label>
+                                    <select class="form-control select2 filter-select" name="description" data-selected={{st.filters.activitylogs.description.value}}>
+                                        <option value="">Все действия</option>
+                                        <option value="created">Создание</option>
+                                        <option value="updated">Редактирование</option>
+                                        <option value="deleted">Удаление</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Раздел</label>
+                                    <select 
+                                        class="form-control ajax-select filter-select"
+                                        data-url="/api/v1/modules?logs=1"
+                                        data-base-url="/api/v1/modules?logs=1"
+                                        data-label="Все разделы"
+                                        name="module_id"
+                                        value="{{st.filters.activitylogs.module_id.value}}">
+                                        <option value="">Все разделы</option>
+                                        {{#st.filters.activitylogs.module_id.value}}
+                                            <option value="{{st.filters.activitylogs.module_id.value}}" selected="selected">{{st.filters.activitylogs.module_id.text}}</option>
+                                        {{/st.filters.activitylogs.module_id.value}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Период</label>
+                                    <select class="form-control select2" name="period" data-selected={{st.period}}>
+                                        <option value="day">За день</option>
+                                        <option value="week">За неделю</option>
+                                        <option value="month">За месяц</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" style="display: none;">
+                                    <label class="control-label">Дата начала - окончания</label>
+                                    <input type='text' class="form-control periodpicker" name="custom-period" value="{{st.dateFrom}} - {{st.dateTill}}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <div id="file_export_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="file_export" role="grid" aria-describedby="file_export_info">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0" data-orderable="causer_id"><b>Кто делал</b></th>
+                                            <th class="border-top-0" data-orderable="subject_id"><b>Запись</b></th>
+                                            <th class="border-top-0" data-orderable="false"><b>Что изменялось</b></th>
+                                            <th class="border-top-0" data-orderable="created_at"><b>Дата</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#data}}
+                                            {{#causer.deleted_at}}<tr class="text-muted">{{/causer.deleted_at}}
+                                            {{^causer.deleted_at}}<tr>{{/causer.deleted_at}}
+                                                <td class="view-btn" data-id="{{id}}">
+                                                    {{#causer_id}}
+                                                        <span>{{causer.lastname}} {{causer.firstname}} {{causer.middlename}}</span>
+                                                    {{/causer_id}}
+                                                </td>
+                                                <td class="view-btn" data-id="{{id}}">
+                                                    <label class="label label-{{color}}">{{action}}</label> 
+                                                    #{{subject_id}}
+                                                    <b>    
+                                                        {{#subject.name}}
+                                                            <br>
+                                                            {{subject.name}}
+                                                        {{/subject.name}}
+                                                        {{#subject.firstname}}
+                                                            <br>
+                                                            {{subject.lastname}} {{subject.firstname}} {{subject.middlename}}
+                                                        {{/subject.firstname}}
+                                                        {{#subject.reg}}
+                                                            <br>
+                                                            {{subject.model}} {{subject.submodel}} {{subject.reg}}
+                                                        {{/subject.reg}}
+                                                    </b>
+                                                    <br>
+                                                    <span>Раздел</span>:
+                                                    <span data-model="{{subject_type}}"></span>
+                                                </td>
+                                                <td class="view-btn" data-id="{{id}}">{{property_str}}</td>
+                                                <td class="view-btn" data-id="{{id}}" data-date="{{created_at}}">{{created_at}}</td>
+                                            </tr>
+                                        {{/data}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

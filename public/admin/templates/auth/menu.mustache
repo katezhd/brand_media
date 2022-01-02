@@ -1,0 +1,41 @@
+{{#modules}}
+    {{#sort}}
+        {{^hasChilds}}
+            <li class="sidebar-item">
+                <a 
+                    href="#{{plural}}" 
+                    data-singular="{{singular}}" 
+                    data-order="{{default_order}}" 
+                    class="sidebar-link list-btn">
+                        <i class="{{icon}}"></i>
+                        <span class="hide-menu"> {{name}} </span>
+                </a>
+            </li>
+        {{/hasChilds}}
+        {{#hasChilds}}
+            <li class="sidebar-item">
+                <a 
+                    class="sidebar-link has-arrow waves-effect waves-dark" 
+                    href="javascript:void(0)" 
+                    aria-expanded="false">
+                        <i class="{{icon}}"></i>
+                        <span class="hide-menu"> {{name}} </span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    {{#childs}}
+                        <li class="sidebar-item">
+                            <a 
+                                href="#{{plural}}" 
+                                data-singular="{{singular}}" 
+                                data-order="{{default_order}}"
+                                class="sidebar-link list-btn">
+                                    <i class="{{icon}}"></i>
+                                    <span class="hide-menu"> {{name}} </span>
+                            </a>
+                        </li>
+                    {{/childs}}
+                </ul>
+            </li>
+        {{/hasChilds}}
+    {{/sort}}
+{{/modules}}

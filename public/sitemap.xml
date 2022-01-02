@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>http://brand.media.test/storage/sitemaps/news/sitemap-1.xml</loc>
+		</sitemap>
+	<sitemap>
+		<loc>http://brand.media.test/storage/sitemaps/category/sitemap.xml</loc>
+		</sitemap>
+	<sitemap>
+		<loc>http://brand.media.test/storage/sitemaps/tag/sitemap-1.xml</loc>
+		</sitemap>
+	<sitemap>
+		<loc>http://brand.media.test/storage/sitemaps/author/sitemap.xml</loc>
+		</sitemap>
+	<sitemap>
+		<loc>http://brand.media.test/storage/sitemaps/page/sitemap.xml</loc>
+		</sitemap>
+</sitemapindex>

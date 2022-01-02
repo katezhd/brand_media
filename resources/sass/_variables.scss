@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;900&display=swap');
+
+$main-color: rgb(0, 25, 92);
+$secondary_light-color: #F4F4F4;
+$accent-color: #DBB42B;
+$hover-color: #5060EF;
+$black: #000E33;
+$disabled-color: rgb(137, 155, 181);
+
+$success: $hover-color;
+$success-dark: $main-color;
+$error: rgb(229, 77, 66);
+$error-dark: rgb(184, 46, 36);
+
+$s: 1.5px;
+
+$f-family: 'Mulish', sans-serif;
+
+$size: 0.87;
+$size-sm: 0.77;
+$size-xs: 0.67;
+$size-xxs: 0.6;
+$line-height: 1.21;
+
+$title-lg: 35px;
+$title-md: 24px;
+$title-sm: 22px;
+$title-xs: 20px;
+$break-title: 26px;
+$service-fz: 18px;
+$date-fz: 15px;
+
+$article-h1: 50px;
+$article-h2: 45px;
+$article-h3: 35px;
+$article-h4: 30px;
+$article-text: 26px;
+$article-image: 16px;

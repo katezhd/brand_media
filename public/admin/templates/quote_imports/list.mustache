@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-8">
+            <h4 class="card-title"><i class="{{st.icon}}"></i> 
+              <span>{{st.caption}}</span>
+            </h4>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <div id="file_export_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered dataTable" id="file_export" role="grid" aria-describedby="file_export_info">
+                  <thead>
+                    <tr class="bg-light">
+                      <th class="border-top-0" data-orderable="text"><b>Текст</b></th>
+                      <th class="border-top-0" data-orderable="name"><b>Автор</b></th>
+                      <th class="border-top-0" data-orderable="imported_at"><b>Дата импорта</b></th>
+                      {{#uScopes.update}}
+                        <th class="border-top-0" style="width: 40px" data-orderable="false"></th>
+                      {{/uScopes.update}} 
+                      {{#uScopes.delete}}
+                        <th class="border-top-0" style="width: 40px" data-orderable="false"></th>
+                      {{/uScopes.delete}}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#data}}
+                      <tr>
+                        <td data-id="{{id}}">
+                          {{text}}
+                        </td>
+                        <td data-id="{{id}}">
+                          <b>{{name}}</b>
+                        </td>
+                        <td data-id="{{id}}">
+                          <span data-date="{{imported_at}}">{{imported_at}}</span>
+                        </td>
+                        {{#uScopes.update}}
+                          <td>
+                            <button type="button" class="btn waves-effect waves-light btn-outline-primary create-btn" data-id="{{id}}" data-type="quote" title="Добавить"><i class="fas fa-plus" style="pointer-events: none;"></i></button>
+                          </td>
+                        {{/uScopes.update}} 
+                        {{#uScopes.delete}}
+                          <td>
+                            <button type="button" class="btn waves-effect waves-light btn-outline-danger delete-btn" data-id="{{id}}" title="Удалить"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        {{/uScopes.delete}}
+                      </tr>
+                    {{/data}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

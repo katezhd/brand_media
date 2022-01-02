@@ -1,0 +1,160 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="card-title">
+              <i class="{{st.icon}}"></i> {{st.caption}}. 
+              {{#st.id}} 
+                {{#preview}}Просмотр записи #{{st.id}}{{/preview}} 
+                {{^preview}}Редактирование записи #{{st.id}}{{/preview}} 
+              {{/st.id}} 
+              {{^st.id}}Создание записи{{/st.id}}
+            </h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <button type="button" class="btn waves-effect waves-light btn-outline-secondary list-btn" data-route="{{st.cntrl}}-list-{{st.page}}"><i class="fas fa-list"></i> Все {{st.caption}}</button> 
+            {{#uScopes.update}} 
+              {{#preview}} 
+                <button type="button" class="btn waves-effect waves-light btn-outline-primary edit-btn" data-id="{{st.id}}"><i class="fas fa-pencil-alt"></i> Редактировать</button> 
+              {{/preview}} 
+              {{^preview}} 
+                {{#st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id="{{st.id}}"><i class="fas fa-check"></i> Сохранить</button> {{/st.id}} 
+              {{/preview}} 
+            {{/uScopes.update}} 
+            {{#uScopes.create}} 
+              {{^preview}} 
+                {{^st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id><i class="fas fa-check"></i> Создать</button> {{/st.id}} 
+              {{/preview}} 
+            {{/uScopes.create}}
+          </div>
+        </div>
+        <form class="edit-form" novalidate>
+          <div class="row">
+            <div class="col-md-12">
+              {{#preview}} 
+                <div class="form-group">
+                  <label class="control-label">Тип инфо-блока</label>
+                  <blockquote>{{type_name}}</blockquote>
+                </div>
+              {{/preview}} 
+              {{^preview}} 
+                <div class="form-group">
+                  <label class="control-label">Тип инфо-блока</label>
+                  <select 
+                      class="form-control select2 collapse-select" 
+                      data-allow-clear="true" 
+                      name="type" 
+                      data-selected="{{type}}">
+                    <option value="quote" data-target="quote">Цитата</option>
+                    <option value="joke" data-target="joke">Анекдот</option>
+                    <option value="video" data-target="video">Видео</option>
+                  </select>
+                </div>
+              {{/preview}}
+            </div>
+            <div class="col-md-12">
+              {{#preview}} 
+                {{#quote}}
+                  <div class="form-group">
+                    <label class="control-label">Имя автора</label>
+                    <blockquote>{{name}}</blockquote>
+
+                    <label class="control-label">Текст цитаты</label>
+                    <blockquote>{{text}}</blockquote>
+                    
+                    <label class="control-label">Ссылка на новость</label>
+                    <blockquote>{{news.name}}</blockquote>
+                  </div>
+                {{/quote}}
+              {{/preview}} 
+              {{^preview}} 
+              <div class="collapse" id="quote">
+                <div class="card card-body">
+                  <span class="card-title">Цитата</span>
+                  <div class="form-group">
+                    <label class="control-label">Имя автора</label> 
+                    <input type="text" class="form-control" name="name" value="{{name}}">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Текст цитаты</label> 
+                    <textarea class="form-control" name="text[quote]" rows="3">{{text}}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Ссылка на новость</label>
+                    <select 
+                        class="form-control ajax-select" 
+                        data-url="/api/v1/news?status=visible" 
+                        data-base-url="/api/v1/news?status=visible"
+                        data-allow-clear="true" 
+                        name="news_id" 
+                        value="{{news_id}}">
+                    <option value=""></option>
+                    {{#news_id}}
+                      <option 
+                          value="{{news_id}}" 
+                          selected="selected">
+                          {{news.name}}
+                      </option>
+                    {{/news_id}}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              {{/preview}} 
+
+              {{#preview}} 
+                {{#joke}} 
+                  <div class="form-group">
+                    <label class="control-label">Анекдот</label>
+                    <blockquote>{{text}}</blockquote>
+                  </div>
+                {{/joke}}
+              {{/preview}} 
+              {{^preview}} 
+                <div class="collapse" id="joke">
+                  <div class="card card-body">
+                    <span class="card-title">Анекдот</span>
+                    <div class="form-group">
+                      <label class="control-label">Текст анекдота</label> 
+                      <textarea class="form-control" name="text[joke]" rows="3">{{text}}</textarea>
+                    </div>
+                  </div>
+                </div>
+              {{/preview}} 
+
+              {{#preview}}
+                {{#video}} 
+                  <div class="form-group">
+                    <label class="control-label">Ссылка на видео YouTube</label>
+                    <blockquote>https://www.youtube.com/watch?v={{video_code}}</blockquote>
+                    <iframe id="ytplayer" type="text/html" width="640" height="360" class="mt-4"
+                      src="https://www.youtube.com/embed/{{video_code}}"
+                      frameborder="0"/>
+                  </div>
+                {{/video}}
+              {{/preview}} 
+              {{^preview}} 
+              <div class="collapse" id="video">
+                <div class="card card-body">
+                  <span class="card-title">Видео</span>
+                  <div class="form-group">
+                    <label class="control-label">Ссылка на видео YouTube</label> 
+                    <input type="hidden" class="form-control" name="video_code" value="{{video_code}}">
+                    <input type="text" class="form-control" name="video_link" value="{{#video_code}}https://www.youtube.com/watch?v={{video_code}}{{/video_code}}">
+                    <iframe id="ytplayer" type="text/html" width="640" height="360" class="mt-4 {{^video_code}}hidden{{/video_code}}"
+                      src="https://www.youtube.com/embed/{{video_code}}"
+                      frameborder="0"/>
+                    
+                  </div>
+                </div>
+              </div>
+              {{/preview}} 
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

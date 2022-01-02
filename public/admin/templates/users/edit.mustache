@@ -1,0 +1,186 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- title -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <h4 class="card-title"><i class="{{st.icon}}"></i> {{st.caption}}.
+                            {{#st.id}}
+                                {{#preview}}Просмотр записи #{{st.id}}{{/preview}}
+                                {{^preview}}Редактирование записи #{{st.id}}{{/preview}}
+                            {{/st.id}}
+                            {{^st.id}}Создание записи{{/st.id}}
+                        </h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        {{^isOwner}}
+                            <button type="button" class="btn waves-effect waves-light btn-outline-secondary list-btn" data-route="{{st.cntrl}}-list-{{st.page}}"><i class="fas fa-list"></i> 
+                                <span data-lang="Все">Все</span>
+                                <span data-lang="{{st.caption}}">{{st.caption}}</span>
+                            </button>
+                        {{/isOwner}}
+                        {{#uScopes.update}}
+                            {{#preview}}
+                                <button 
+                                    type="button" 
+                                    class="btn waves-effect waves-light btn-outline-primary edit-btn" 
+                                    data-id="{{st.id}}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Редактировать
+                                </button>
+                            {{/preview}}
+                            {{^preview}}
+                                {{#st.id}}
+                                    <button 
+                                        type="button" 
+                                        class="btn waves-effect waves-light btn-outline-success save-btn" 
+                                        data-id="{{st.id}}">
+                                            <i class="fas fa-check"></i>
+                                            Сохранить
+                                    </button>
+                                {{/st.id}}
+                            {{/preview}}
+                        {{/uScopes.update}}
+                        {{^uScopes.update}}
+                            {{#isOwner}}
+                                <button 
+                                    type="button" 
+                                    class="btn waves-effect waves-light btn-outline-success save-btn" 
+                                    data-id="{{st.id}}">
+                                        <i class="fas fa-check"></i>
+                                        Сохранить
+                                </button>
+                            {{/isOwner}}
+                        {{/uScopes.update}}
+                        {{#uScopes.create}}
+                            {{^preview}}
+                                {{^st.id}}
+                                    <button 
+                                        type="button" 
+                                        class="btn waves-effect waves-light btn-outline-success save-btn" 
+                                        data-id>
+                                            <i class="fas fa-check"></i>
+                                            Создать
+                                    </button>
+                                {{/st.id}}
+                            {{/preview}}
+                        {{/uScopes.create}}
+                    </div>
+                </div>
+                <!-- title -->
+                <div class="row">
+                    <div class="col-md-12">
+                        {{#preview}}
+                            <label class="control-label">Фамилия и Имя</label>
+                            <blockquote>{{lastname}} {{firstname}}</blockquote>
+                            
+                            <label class="control-label">Email</label>
+                            <blockquote>
+                                <a href="mailto:{{email}}">{{email}}</a>
+                            </blockquote> 
+
+                            <label class="control-label">Роль</label>
+                            <blockquote>
+                                <ul>
+                                    {{#roles}}
+                                        <li>{{name}}</li>
+                                    {{/roles}}
+                                </ul>
+                            </blockquote>
+                        {{/preview}}
+                        {{^preview}}
+                            <form class="edit-form" novalidate>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input type="hidden" class="form-control" name="id" value="{{id}}">
+                                        <div class="form-group">
+                                            <label class="control-label">Имя</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="firstname" 
+                                                value="{{firstname}}" 
+                                                required>
+                                            <div class="invalid-feedback">Обязательное поле</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Фамилия</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="lastname" 
+                                                value="{{lastname}}">
+                                            <div class="invalid-feedback">Обязательное поле</div>
+                                        </div>
+                                        {{^isOwner}}
+                                            <div class="form-group">
+                                                <label class="control-label" data-lang="Роль">Роль</label>
+
+                                                <select 
+                                                    class="form-control ajax-select" 
+                                                    data-url="/api/v1/roles" 
+                                                    multiple 
+                                                    data-selection-length="5" 
+                                                    name="role_id[]" 
+                                                    required>
+                                                    
+                                                    {{#roles}}
+                                                        <option 
+                                                            value="{{id}}" 
+                                                            selected="selected">
+                                                            {{name}}
+                                                        </option>
+                                                    {{/roles}}
+                                                </select>
+                                            </div>
+                                        {{/isOwner}}
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Email</label>
+                                            <input 
+                                                type="email" 
+                                                class="form-control" 
+                                                name="email" 
+                                                value="{{email}}" 
+                                                required>
+                                            <div class="invalid-feedback">Обязательное поле</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Новый пароль</label>
+                                            {{#st.id}}
+                                                <input type="password" class="form-control" name="password">
+                                            {{/st.id}}
+                                            {{^st.id}}
+                                                <input type="password" class="form-control" name="password" required>
+                                            {{/st.id}}
+                                            <div class="invalid-feedback">Обязательное поле</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Подтвердите новый пароль</label>
+                                            {{#st.id}}
+                                                <input 
+                                                    type="password" 
+                                                    class="form-control" 
+                                                    name="password_confirmation">
+                                            {{/st.id}}
+                                            {{^st.id}}
+                                                <input 
+                                                    type="password" 
+                                                    class="form-control" 
+                                                    name="password_confirmation" 
+                                                    required>
+                                            {{/st.id}}
+                                            <div class="invalid-feedback">Обязательное поле</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        {{/preview}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

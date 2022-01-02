@@ -1,0 +1,180 @@
+{{#data}}
+    {{#is_parent}}
+        <div class="col-md-12"> 
+    {{/is_parent}}
+    {{^is_parent}}
+        {{#parent}} 
+            <div class="col-md-11 offset-1"> 
+        {{/parent}}
+        {{^parent}} 
+            <div class="col-md-12"> 
+        {{/parent}} 
+    {{/is_parent}}
+        <div class="form-group">
+            <div class="custom-control custom-checkbox">
+                {{#preview}}
+                    <input
+                        disabled
+                        type="checkbox"
+                        class="custom-control-input"
+                        value="{{id}}"
+                        data-checked="{{checked}}" 
+                        id="modules[{{plural}}]"
+                        name="modules[{{plural}}]">
+                {{/preview}}
+                {{^preview}}
+                    <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        value="{{id}}"
+                        data-checked="{{checked}}" 
+                        id="modules[{{plural}}]"
+                        name="modules[{{plural}}]">
+                {{/preview}}
+                <label
+                    class="custom-control-label"
+                    for="modules[{{plural}}]">{{name}}
+                </label>
+            </div>
+        </div>
+    </div>
+    {{^is_parent}}
+        {{#parent}} 
+            <div class="col-md-11 offset-1"> 
+        {{/parent}}
+        {{^parent}} 
+            <div class="col-md-12"> 
+        {{/parent}}
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-check form-check-inline">
+                        <div class="custom-control custom-checkbox">
+                            <input
+                                type="hidden"
+                                class="custom-control-input"
+                                value="1"
+                                name="scopes[{{plural}}][read]">
+                            <input 
+                                disabled 
+                                type="checkbox" 
+                                class="custom-control-input" 
+                                value="1" 
+                                data-checked="1" 
+                                id="scopes.{{plural}}.read" 
+                                name="_scopes[read]">
+                            <label
+                                class="custom-control-label"
+                                for="scopes.{{plural}}.read">Просмотр</label>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="custom-control custom-checkbox">
+                            {{#preview}}
+                                <input
+                                    disabled
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    value="1"
+                                    data-checked="{{scopes.create}}"
+                                    id="scopes.{{plural}}.create"
+                                    name="scopes[{{plural}}][create]">
+                            {{/preview}}
+                            {{^preview}}
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    value="1"
+                                    data-checked="{{scopes.create}}"
+                                    id="scopes.{{plural}}.create"
+                                    name="scopes[{{plural}}][create]">
+                            {{/preview}}
+                            <label
+                                class="custom-control-label"
+                                for="scopes.{{plural}}.create">Создание</label>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="custom-control custom-checkbox">
+                            {{#preview}}
+                                <input
+                                    disabled
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    value="1"
+                                    data-checked="{{scopes.update}}"
+                                    id="scopes.{{plural}}.update"
+                                    name="scopes[{{plural}}][update]">
+                            {{/preview}}
+                            {{^preview}}
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    value="1"
+                                    data-checked="{{scopes.update}}"
+                                    id="scopes.{{plural}}.update"
+                                    name="scopes[{{plural}}][update]">
+                            {{/preview}}
+                            <label
+                                class="custom-control-label"
+                                for="scopes.{{plural}}.update">Редактирование</label>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <div class="custom-control custom-checkbox">
+                            {{#preview}}
+                                <input
+                                    disabled
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    value="1"
+                                    data-checked="{{scopes.delete}}"
+                                    id="scopes.{{plural}}.delete"
+                                    name="scopes[{{plural}}][delete]">
+                            {{/preview}}
+                            {{^preview}}
+                                <input
+                                    type="checkbox"
+                                    class="custom-control-input"
+                                    value="1"
+                                    data-checked="{{scopes.delete}}"
+                                    id="scopes.{{plural}}.delete"
+                                    name="scopes[{{plural}}][delete]">
+                            {{/preview}}
+                            <label
+                                class="custom-control-label"
+                                for="scopes.{{plural}}.delete">Удаление</label>
+                        </div>
+                    </div>
+                    {{#is_publishable}}
+                        <div class="form-check form-check-inline">
+                            <div class="custom-control custom-checkbox">
+                                {{#preview}}
+                                    <input
+                                        disabled
+                                        type="checkbox"
+                                        class="custom-control-input"
+                                        value="1"
+                                        data-checked="{{scopes.publish}}"
+                                        id="scopes.{{plural}}.publish"
+                                        name="scopes[{{plural}}][publish]">
+                                {{/preview}}
+                                {{^preview}}
+                                    <input
+                                        type="checkbox"
+                                        class="custom-control-input"
+                                        value="1"
+                                        data-checked="{{scopes.publish}}"
+                                        id="scopes.{{plural}}.publish"
+                                        name="scopes[{{plural}}][publish]">
+                                {{/preview}}
+                                <label
+                                    class="custom-control-label"
+                                    for="scopes.{{plural}}.publish">Публикация</label>
+                            </div>
+                        </div>
+                    {{/is_publishable}}
+                </div>
+            </div>
+        </div>
+    {{/is_parent}}
+{{/data}}

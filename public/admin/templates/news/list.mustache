@@ -1,0 +1,170 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="card-title"><i class="{{st.icon}}"></i> 
+              <span>{{st.caption}}</span>
+            </h4>
+          </div>
+          <div class="col-md-6 text-right">
+            {{#uScopes.create}} 
+              <a href="#templates" 
+                type="button" 
+                data-toggle="collapse"
+                class="btn waves-effect waves-light btn-outline-primary templates-collapse" 
+                data-url="/v1/templates"><i class="fas fa-th"></i> <span>Выбрать из шаблонов</span></a> 
+              <button type="button" class="btn waves-effect waves-light btn-outline-success add-btn" data-route="#{{st.cntrl}}-create"><i class="fas fa-plus"></i> <span>Добавить</span></button> 
+            {{/uScopes.create}}
+          </div>
+        </div>
+        <div class="row collapse" id="templates"></div>
+        <div class="card bg-light">
+          <div class="card-body collapse show">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">Категория</label> 
+                  <select 
+                    class="form-control ajax-select filter-select" 
+                    data-url="/api/v1/categories?status=visible" 
+                    data-base-url="/api/v1/categories?status=visible"
+                    data-label="Все категории" 
+                    name="category_id" 
+                    value="{{st.filters.news.category_id.value}}">
+                    <option value="">Все категории</option>
+                    {{#st.filters.news.category_id.value}}
+                    <option value="{{st.filters.news.category_id.value}}" selected="selected">{{st.filters.news.category_id.text}}</option>
+                    {{/st.filters.news.category_id.value}}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">Тег</label> 
+                  <select 
+                    class="form-control ajax-select filter-select" 
+                    data-url="/api/v1/tags?status=visible" 
+                    data-base-url="/api/v1/tags?status=visible"
+                    data-label="Все теги" 
+                    name="tag_id" 
+                    value="{{st.filters.news.tag_id.value}}">
+                    <option value="">Все теги</option>
+                    {{#st.filters.news.tag_id.value}}
+                    <option value="{{st.filters.news.tag_id.value}}" selected="selected">{{st.filters.news.tag_id.text}}</option>
+                    {{/st.filters.news.tag_id.value}}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">Автор</label> 
+                  <select class="form-control ajax-select filter-select" data-url="/api/v1/authors" data-base-url="/api/v1/authors" data-label="Все авторы" name="author_id" value="{{st.filters.news.author_id.value}}">
+                    <option value="">Все авторы</option>
+                    {{#st.filters.news.author_id.value}}
+                    <option value="{{st.filters.news.author_id.value}}" selected="selected">{{st.filters.news.author_id.text}}</option>
+                    {{/st.filters.news.author_id.value}}
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">Статус</label> 
+                  <select class="form-control select2 filter-select" data-selected="{{st.filters.news.status.value}}" name="status" value="{{st.filters.news.status.value}}">
+                    <option value="">Все статусы</option>
+                    <option value="delayed">Запланированные</option>
+                    <option value="visible">Опубликованные</option>
+                    <option value="hidden">Не опубликованные</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="control-label">Дата створення</label>
+                  <select class="form-control select2" name="period" data-selected={{st.period}}>
+                    <option value="session">Загалом</option>
+                    <option value="day">За день</option>
+                    <option value="week">За тиждень</option>
+                    <option value="month">За місяць</option>
+                    <option value="quarter">За квартал</option>
+                    <option value="year">За рік</option>
+                    <option value="custom">За довільний проміжок часу</option>
+                  </select>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <div id="file_export_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered dataTable" id="file_export" role="grid" aria-describedby="file_export_info">
+                  <thead>
+                    <tr class="bg-light">
+                      <th class="border-top-0" data-orderable="name"><b>Название</b></th>
+                      <th class="border-top-0" data-orderable="category_id"><b>Категория</b></th>
+                      <th class="border-top-0" data-orderable="author_id"><b>Автор</b></th>
+                      <th class="border-top-0" data-orderable="piblished_at"><b>Статус</b></th>
+                      <th class="border-top-0" data-orderable="updated_at"><b>Дата редактирования</b></th>
+                      {{#uScopes.update}}
+                        <th class="border-top-0" style="width: 40px" data-orderable="false"></th>
+                      {{/uScopes.update}} 
+                      {{#uScopes.delete}}
+                        <th class="border-top-0" style="width: 40px" data-orderable="false"></th>
+                      {{/uScopes.delete}}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#data}}
+                      <tr>
+                        <td class="view-btn" data-id="{{id}}"><b>{{name}}</b></td>
+                        <td class="view-btn" data-id="{{id}}"><b>{{category.name}}</b></td>
+                        <td class="view-btn" data-id="{{id}}"><b>{{author.firstname}} {{author.lastname}}</b></td>
+                        <td class="view-btn" data-id="{{id}}">
+                          {{#is_published}} 
+                            {{#is_delayed}}
+                              <label class="label label-warning">заплановано</label> 
+                            {{/is_delayed}}
+                            {{^is_delayed}}
+                              <label class="label label-success">опубліковано</label> 
+                            {{/is_delayed}}
+                            <br>
+                            <span data-date="{{published_at}}">{{published_at}}</span>
+                          {{/is_published}} 
+                          {{^is_published}} 
+                            <label class="label label-danger">неопубліковано</label> 
+                          {{/is_published}}
+                          {{#publisher}}
+                            <br>{{publisher.firstname}} {{publisher.lastname}}
+                          {{/publisher}}
+                        </td>
+                        <td class="view-btn" data-id="{{id}}">
+                          <span data-date="{{updated_at}}">{{updated_at}}</span>
+                          {{#updater}}
+                            <br>{{updater.firstname}} {{updater.lastname}}
+                          {{/updater}}
+                        </td>
+                        {{#uScopes.update}}
+                          <td>
+                            <button type="button" class="btn waves-effect waves-light btn-outline-primary edit-btn" data-id="{{id}}" title="Редагувати"><i class="fas fa-pencil-alt"></i></button>
+                          </td>
+                        {{/uScopes.update}} 
+                        {{#uScopes.delete}}
+                          <td>
+                            <button type="button" class="btn waves-effect waves-light btn-outline-danger delete-btn" data-id="{{id}}" title="Видалити"><i class="fas fa-trash-alt"></i></button>
+                          </td>
+                        {{/uScopes.delete}}
+                      </tr>
+                    {{/data}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

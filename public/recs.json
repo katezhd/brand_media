@@ -1,0 +1,84 @@
+{
+  "items": [
+    {
+      "id": "7",
+      "href": "http://brand_media.test/news/silovoi-zaxvat-i-blokirovka-deyatelnosti-cto-proisxodit-s-natura-siberica",
+      "title": "«Силовой захват и блокировка деятельности». Что происходит с Natura Siberica",
+      "description": "description",
+      "image": "http://brand_media.test/storage/news/y36vzjpyaldfcqin.jpeg",
+      "count": "6"
+    },
+    {
+      "id": "10",
+      "href": "http://brand_media.test/news/tesla-obnovila-rekord-po-postavkam-avtomobilei-za-kvartal",
+      "title": "Tesla обновила рекорд по поставкам автомобилей за квартал",
+      "description": "description",
+      "image": "http://brand_media.test/storage/news/5j57enr0gy5iydcq.jpeg",
+      "count": "6"
+    },
+    {
+      "id": "11",
+      "href": "http://brand_media.test/news/snouden-iz-facebook-kak-eks-sotrudnica-slila-komprometiruyushhie-kompaniyu-dokumenty",
+      "title": "Сноуден из Facebook. Как экс-сотрудница «слила» компрометирующие компанию документы",
+      "description": "description",
+      "image": "http://brand_media.test/storage/news/oidhmr7ggtfuqd4f.jpeg",
+      "count": "6"
+    },
+    {
+      "id": "12",
+      "href": "http://brand_media.test/tinkov-vyplatit-506-mln-strafa-dlya-uregulirovaniya-pretenzii-v-ssa",
+      "title": "Тиньков выплатит $506 млн штрафа для урегулирования претензий в США",
+      "description": "description",
+      "image": "http://brand_media.test/storage/news/mzbg686e3e11lgu7.jpeg",
+      "count": "6"
+    },
+    {
+      "id": "13",
+      "href": "http://brand_media.test/news/torgi-akciyami-evergrande-priostanovleny-iz-za-prodazi-podrazdeleniya",
+      "title": "Торги акциями Evergrande приостановлены из-за продажи подразделения",
+      "description": "description",
+      "image": "http://brand_media.test/storage/news/lxzsf2slg0w3ejyj.jpeg",
+      "count": "6"
+    },
+    {
+      "id": "3",
+      "href": "http://brand_media.test/news/antikrizisnyi-cempion-s-problemnym-nasledstvom-cto-angela-merkel-sdelala-s-ekonomikoi-germanii-za-16-let",
+      "title": "Антикризисный чемпион с проблемным наследством: что Ангела Меркель сделала с экономикой Германии за 16 лет",
+      "description": "description",
+      "image": "NULL",
+      "count": "6"
+    },
+    {
+      "id": "2",
+      "href": "http://brand_media.test/news/suverennyi-fond-norvegii-prodast-akcii-kompanii-bez-celei-po-sokrashheniyu-vybrosov-co2",
+      "title": "Суверенный фонд Норвегии продаст акции компаний без целей по сокращению выбросов CO₂",
+      "description": "description",
+      "image": "NULL",
+      "count": "6"
+    },
+    {
+      "id": "4",
+      "href": "http://brand_media.test/news/testy-dlya-nekvalov-zacem-i-kak-ix-sdavat",
+      "title": "Тесты для «неквалов»: зачем и как их сдавать",
+      "description": "description",
+      "image": "http://brand_media.test/storage/news/gahsbmozljudhl1z.jpeg",
+      "count": "6"
+    },
+    {
+      "id": "5",
+      "href": "http://brand_media.test/news/bessmennyi-glava-pocta-banka-mozet-uiti-v-otstavku-reuters",
+      "title": "Бессменный глава Почта Банка может уйти в отставку — Reuters",
+      "description": "description",
+      "image": "NULL",
+      "count": "6"
+    },
+    {
+      "id": "6",
+      "href": "http://brand_media.test/news/agentstva-rezko-uxudsili-reitingi-krupnyx-kitaiskix-zastroishhikov",
+      "title": "Агентства резко ухудшили рейтинги крупных китайских застройщиков",
+      "description": "description",
+      "image": "NULL",
+      "count": "6"
+    }
+  ]
+}

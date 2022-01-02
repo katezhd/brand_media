@@ -1,0 +1,171 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h4 class="card-title">
+              <i class="{{st.icon}}"></i> {{st.caption}}. 
+              {{#st.id}} 
+                {{#preview}}Просмотр записи #{{st.id}}{{/preview}} 
+                {{^preview}}Редактирование записи #{{st.id}}{{/preview}} 
+              {{/st.id}} 
+              {{^st.id}}Создание записи{{/st.id}}
+            </h4>
+          </div>
+          <div class="col-md-6 text-right">
+            <button type="button" class="btn waves-effect waves-light btn-outline-secondary list-btn" data-route="{{st.cntrl}}-list-{{st.page}}"><i class="fas fa-list"></i> Все {{st.caption}}</button> 
+            {{#uScopes.update}} 
+              {{#preview}} 
+                <button type="button" class="btn waves-effect waves-light btn-outline-primary edit-btn" data-id="{{st.id}}"><i class="fas fa-pencil-alt"></i> Редактировать</button> 
+              {{/preview}} 
+              {{^preview}} 
+                {{#st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id="{{st.id}}"><i class="fas fa-check"></i> Сохранить</button> {{/st.id}} 
+              {{/preview}} 
+            {{/uScopes.update}} 
+            {{#uScopes.create}} 
+              {{^preview}} 
+                {{^st.id}} <button type="button" class="btn waves-effect waves-light btn-outline-success save-btn" data-id><i class="fas fa-check"></i> Создать</button> {{/st.id}} 
+              {{/preview}} 
+            {{/uScopes.create}}
+          </div>
+        </div>
+        <form class="edit-form" novalidate>
+          <div class="row">
+            <div class="col-md-8">
+              {{#preview}} 
+                <label class="control-label">Имя и Фамилия</label>
+                <blockquote>{{firstname}} {{lastname}}</blockquote>
+
+                <label class="control-label">Тег title</label> 
+                <blockquote>{{#meta_title}}{{meta_title}}{{/meta_title}}{{^meta_title}}{{firstname}} {{lastname}}{{/meta_title}}</blockquote>
+                <small class="form-text text-muted">А также og:title, twitter:title, itemprop="headline"</small>
+
+                <br>
+                <label class="control-label">Тег description</label> 
+                <blockquote>{{meta_description}}</blockquote>
+                <small class="form-text text-muted">А также og:description, twitter:description, itemprop="description"</small>
+
+              {{/preview}} 
+              {{^preview}} 
+                <input type="hidden" class="form-control" name="id" value="{{id}}">
+                <div class="form-group">
+                  <label class="control-label">Имя</label>
+                  <input 
+                      type="text" 
+                      class="form-control" 
+                      name="firstname" 
+                      value="{{firstname}}" 
+                      required>
+                  <div class="invalid-feedback">Обязательное поле</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Фамилия</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        name="lastname" 
+                        value="{{lastname}}">
+                  <div class="invalid-feedback">Обязательное поле</div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Тег title</label>
+                  {{#meta_title}}
+                    <input type="text" class="form-control" name="meta_title" value="{{meta_title}}">
+                  {{/meta_title}}
+                  {{^meta_title}}
+                    <input type="text" class="form-control" name="meta_title" value="{{firstname}} {{lastname}}">
+                  {{/meta_title}}
+                  <small class="form-text text-muted">А также og:title, twitter:title, itemprop="headline"</small>
+                </div>
+
+                <div class="form-group">
+                  <label class="control-label">Тег description</label>
+                  <textarea class="form-control" name="meta_description" rows="2">{{meta_description}}</textarea>
+                  <small class="form-text text-muted">А также og:description, twitter:description, itemprop="description"</small>
+                </div>
+              {{/preview}}
+            </div>
+            <div class="col-md-4">
+                {{#preview}} 
+                  <label class="control-label">Опубликовано</label> 
+                  {{#published_at}}
+                    <blockquote>Да</blockquote>
+                  {{/published_at}} 
+                  {{^published_at}}
+                    <blockquote>Нет</blockquote>
+                  {{/published_at}} 
+                {{/preview}} 
+                {{^preview}}
+                  {{#uScopes.publish}}
+                    <div class="form-group">
+                      <label class="control-label">Опубликовано</label> 
+                      <select class="form-control select2" name="status" data-selected="{{#published_at}}1{{/published_at}}{{^published_at}}0{{/published_at}}">
+                        <option value="1">Да</option>
+                        <option value="0">Нет</option>
+                      </select>
+                      <div class="invalid-feedback"></div>
+                    </div>
+                  {{/uScopes.publish}}
+                {{/preview}} 
+                {{#preview}} 
+                  {{#image}} 
+                    <label class="control-label">Изображение</label>
+                    <div class="card el-element-overlay">
+                      <div class="el-card-item">
+                        <div class="el-card-avatar el-overlay-1">
+                          <img class="image-preview" src="/storage/authors/{{image}}" alt="{{name}}">
+                          <div class="el-overlay">
+                          <ul class="list-style-none el-info">
+                            <li class="el-item">
+                              <a class="btn default btn-outline image-popup el-link" href="/storage/authors/{{image}}"><i class="sl-icon-magnifier"></i></a>
+                            </li>
+                          </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {{/image}} 
+                {{/preview}} 
+                {{^preview}}
+                  <div class="form-group">
+                  <label class="control-label">Изображение</label> 
+                  <input type="hidden" name="image"> 
+                  <input type="hidden" name="image_delete"> 
+                  <input type="file" name="imageupload" style="display: none;">
+                  <div class="card el-element-overlay">
+                    <div class="el-card-item">
+                      <div class="el-card-avatar el-overlay-1">
+                        {{#image}} 
+                          <img class="image-preview" src="/storage/authors/{{image}}" alt="{{name}}"> 
+                        {{/image}} 
+                        {{^image}} 
+                          <img class="image-preview" src="assets/images/holder.jpg" alt=""> 
+                        {{/image}}
+                          <div class="el-overlay">
+                          <ul class="list-style-none el-info">
+                            {{#image}}
+                              <li class="el-item">
+                                <a class="btn default btn-outline image-popup el-link" href="/storage/authors/{{image}}"><i class="sl-icon-magnifier"></i></a>
+                              </li>
+                              <li class="el-item">
+                                <a class="btn default btn-outline delete-image-btn el-link" href="#"><i class="sl-icon-trash"></i></a>
+                              </li>
+                            {{/image}}
+                              <li class="el-item">
+                                <a class="btn default btn-outline upload-image-btn el-link" href="#"><i class="icon-Data-Upload"></i></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{/preview}}
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

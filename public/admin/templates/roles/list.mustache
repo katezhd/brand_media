@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- title -->
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <h4 class="card-title"><i class="{{st.icon}}"></i> {{st.caption}}</h4>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        {{#uScopes.create}}
+                            <button 
+                                type="button" 
+                                class="btn waves-effect waves-light btn-outline-success add-btn" 
+                                data-route="#{{st.cntrl}}-create">
+                                    <i class="fas fa-plus"></i>
+                                    Добавить
+                            </button>
+                        {{/uScopes.create}}
+                    </div>
+                </div>
+                <!-- title -->
+                <div class="table-responsive">
+                    <div 
+                        id="file_export_wrapper" 
+                        class="dataTables_wrapper container-fluid dt-bootstrap4">
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table 
+                                    class="table table-bordered dataTable" 
+                                    id="file_export" 
+                                    role="grid" 
+                                    aria-describedby="file_export_info">
+                                    <thead>
+                                        <tr class="bg-light">
+                                            <th class="border-top-0" data-orderable="name"><b>Название</b></th>
+                                            {{#uScopes.update}}
+                                                <th 
+                                                    class="border-top-0" 
+                                                    style="width: 40px" 
+                                                    data-orderable="false"></th>
+                                            {{/uScopes.update}}
+                                            {{#uScopes.delete}}
+                                                <th 
+                                                    class="border-top-0" 
+                                                    style="width: 40px" 
+                                                    data-orderable="false"></th>
+                                            {{/uScopes.delete}}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#data}}
+                                            <tr>
+                                                <td class="view-btn" data-id="{{id}}"><b>{{name}}</b></td>
+                                                {{#uScopes.update}}
+                                                    <td>
+                                                        <button 
+                                                            type="button" 
+                                                            class="btn waves-effect waves-light btn-outline-primary edit-btn" 
+                                                            data-id="{{id}}" 
+                                                            title="Редагувати">
+                                                                <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </td>
+                                                {{/uScopes.update}}
+                                                {{#uScopes.delete}}
+                                                    <td>
+                                                        {{#deletable}}
+                                                            <button 
+                                                                type="button" 
+                                                                class="btn waves-effect waves-light btn-outline-danger delete-btn" 
+                                                                data-id="{{id}}" 
+                                                                title="Видалити">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        {{/deletable}}
+                                                    </td>
+                                                {{/uScopes.delete}}
+                                            </tr>
+                                        {{/data}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

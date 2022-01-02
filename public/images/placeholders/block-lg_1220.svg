@@ -1,0 +1,11 @@
+<svg width="490" height="360" viewBox="0 0 490 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="490" height="360" rx="10" fill="#D0D5DD"/>
+<g opacity="0.7">
+<path d="M0 45H195.66V75H0V45Z" fill="white"/>
+</g>
+<g opacity="0.7">
+<rect x="40" y="223" width="410" height="25" fill="white"/>
+<rect x="40" y="259" width="410" height="25" fill="white"/>
+<rect x="40" y="295" width="269.962" height="25" fill="white"/>
+</g>
+</svg>

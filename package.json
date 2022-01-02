@@ -1,0 +1,35 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "mix --production",
+        "build-report": "vue-cli-service build --report"
+    },
+    "devDependencies": {
+        "@vue/compiler-sfc": "^3.2.20",
+        "axios": "^0.21",
+        "browser-sync": "^2.27.5",
+        "laravel-mix": "^6.0.34",
+        "lodash": "^4.17.19",
+        "postcss": "^8.3.11",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.43.3",
+        "sass-loader": "^12.2.0",
+        "vue": "^3.2.20",
+        "vue-loader": "^16.8.2",
+        "webpack-bundle-analyzer": "^4.5.0"
+    },
+    "dependencies": {
+        "@fancyapps/ui": "^4.0.7",
+        "@kyvg/vue3-notification": "^2.3.4",
+        "compression": "^1.7.4",
+        "gulp": "^4.0.2",
+        "puppeteer": "^10.4.0",
+        "swiper": "^7.1.0",
+        "vue-axios": "^3.3.7",
+        "vue-router": "^4.0.12"
+    }
+}
